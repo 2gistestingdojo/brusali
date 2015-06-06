@@ -28,6 +28,7 @@ namespace TestingDojo2015
             this.AddButtonElement = this.MainWindowElement.FindElement(By.Id("AddNewProductMW"));
         }
 
+        [Test]
         public void AddItem()
         {
             this.AddButtonElement.Click();
@@ -42,9 +43,13 @@ namespace TestingDojo2015
 
             var productsList = this.MainWindowElement.FindElement(By.Id("ProductsMW"));
             var productItems = productsList.FindElements(By.ClassName("ListViewItem"));
-            var lastItem = productItems[productItems.Count - 1];
+            var lastItem = productItems.Last();
+            var texts = lastItem.FindElements(By.ClassName("TextBlock"));
+            var id = texts.First();
+            var text = texts.Last();
 
-            Assert.That(lastItem.Text, Is.EqualTo("Test product 1"));
+            Assert.That(id.GetAttribute("Name"), Is.EqualTo("9"));
+            Assert.That(text.GetAttribute("Name"), Is.EqualTo("Test product 1"));
         }
     }
 }
