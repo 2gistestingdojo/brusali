@@ -62,7 +62,7 @@ namespace TestingDojo2015
          
             foreach (var item in productItems)
             {
-                var tmp = item.FindElements(By.ClassName("TextBlock")).Last().GetAttribute("Name");
+                var tmp = item.FindElements(By.ClassName("TextBlock")).ElementAt(1).GetAttribute("Name");
 
                 if (tmp == name)
                 {
@@ -74,7 +74,7 @@ namespace TestingDojo2015
 
             var texts = element.FindElements(By.ClassName("TextBlock"));
             var id = texts.First();
-            var text = texts.Last();
+            var text = texts.ElementAt(1);
 
             Assert.That(id.GetAttribute("Name"), Is.EqualTo(Convert.ToString(maxId + 1)));
             Assert.That(text.GetAttribute("Name"), Is.EqualTo("Test product 1"));

@@ -49,6 +49,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Release2AddTests.cs" />
     <Compile Include="Release3EditingAndSortingTests.cs" />
+    <Compile Include="Release4DeleteAndSortingTypeTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

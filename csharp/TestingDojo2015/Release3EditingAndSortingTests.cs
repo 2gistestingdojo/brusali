@@ -53,7 +53,7 @@ namespace TestingDojo2015
             var firstItem = productItems.First();
             var texts = firstItem.FindElements(By.ClassName("TextBlock"));
             var id = texts.First();
-            var text = texts.Last();
+            var text = texts.ElementAt(1);
 
             Assert.That(text.GetAttribute("Name"), Is.EqualTo(newName));
             Assert.That(itemId, Is.EqualTo(id.GetAttribute("Name")));
@@ -79,7 +79,7 @@ namespace TestingDojo2015
             var productItems = productsList.FindElements(By.ClassName("ListViewItem"));
             var lastItem = productItems.First();
             var texts = lastItem.FindElements(By.ClassName("TextBlock"));
-            var text = texts.Last();
+            var text = texts.ElementAt(1);
 
             Assert.That(text.GetAttribute("Name"), Is.EqualTo(name));
         }
