@@ -128,6 +128,17 @@ namespace TestingDojo2015
             var lastElementName = this.GetFieldTextValue(productItems.Last(), 1);
 
             Assert.That(lastElementName, Is.EqualTo(name));
+
+            var prevId = 0;
+
+            foreach (var item in productItems)
+            {
+                var tmp = Convert.ToInt32(this.GetFieldTextValue(item, 0));
+
+                Assert.That(prevId, Is.LessThan(tmp));
+
+                prevId = tmp;
+            }
         }
     }
 }

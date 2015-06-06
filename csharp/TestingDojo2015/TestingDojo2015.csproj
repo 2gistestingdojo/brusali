@@ -51,6 +51,7 @@
     <Compile Include="Release3EditingAndSortingTests.cs" />
     <Compile Include="Release4DeleteAndSortingTypeTests.cs" />
     <Compile Include="Release5MultipleDeleteAndSortingFieldTests.cs" />
+    <Compile Include="Release6CategoryTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
