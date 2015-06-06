@@ -77,10 +77,8 @@ namespace TestingDojo2015
             var productItems = productsList.FindElements(By.ClassName("ListViewItem"));
             var lastItem = productItems.First();
             var texts = lastItem.FindElements(By.ClassName("TextBlock"));
-            var id = texts.First();
             var text = texts.Last();
 
-            Assert.That(id.GetAttribute("Name"), Is.EqualTo("9"));
             Assert.That(text.GetAttribute("Name"), Is.EqualTo("Test product 1"));
         }
     }
