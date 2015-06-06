@@ -15,7 +15,6 @@ namespace TestingDojo2015
 
     class Release3EditingAndSortingTests : BaseTestFixture
     {
-        public IWebElement MainWindowElement;
         public IWebElement SearchTextboxElement;
         public IWebElement SearchButtonElement;
 
@@ -24,7 +23,6 @@ namespace TestingDojo2015
         {
             base.SetUp();
 
-            this.MainWindowElement = this.Driver.FindElementById("MainWindow");
             this.SearchTextboxElement = this.MainWindowElement.FindElement(By.Id("QueryMW"));
             this.SearchButtonElement = this.MainWindowElement.FindElement(By.Id("SearchMW"));
         }
@@ -32,8 +30,7 @@ namespace TestingDojo2015
         [Test]
         public void EditItem()
         {
-            var productsList = this.MainWindowElement.FindElement(By.Id("ProductsMW"));
-            var productItems = productsList.FindElements(By.ClassName("ListViewItem"));
+            var productItems = this.getItemList();
             var lastItem = productItems.Last();
             var itemId = lastItem.FindElements(By.ClassName("TextBlock")).First().GetAttribute("Name");
             var actions = new Actions(this.Driver);
@@ -49,7 +46,7 @@ namespace TestingDojo2015
 
             saveButton.Click();
 
-            productItems = productsList.FindElements(By.ClassName("ListViewItem"));
+            productItems = this.getItemList();
             var firstItem = productItems.First();
             var texts = firstItem.FindElements(By.ClassName("TextBlock"));
             var id = texts.First();
@@ -75,8 +72,7 @@ namespace TestingDojo2015
 
             addButton.Click();
 
-            var productsList = this.MainWindowElement.FindElement(By.Id("ProductsMW"));
-            var productItems = productsList.FindElements(By.ClassName("ListViewItem"));
+            var productItems = this.getItemList();
             var lastItem = productItems.First();
             var texts = lastItem.FindElements(By.ClassName("TextBlock"));
             var text = texts.ElementAt(1);

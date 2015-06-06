@@ -3,10 +3,12 @@
     #region using
 
     using System;
+    using System.Collections.ObjectModel;
     using System.IO;
 
     using NUnit.Framework;
 
+    using OpenQA.Selenium;
     using OpenQA.Selenium.Remote;
 
     #endregion
@@ -16,6 +18,8 @@
         #region Public Properties
 
         public RemoteWebDriver Driver { get; set; }
+
+        public IWebElement MainWindowElement;
 
         #endregion
 
@@ -28,12 +32,22 @@
             var dc = new DesiredCapabilities();
             dc.SetCapability("app", appPath);
             this.Driver = new RemoteWebDriver(new Uri("http://127.0.0.1:9999"), dc);
+
+            this.MainWindowElement = this.Driver.FindElementById("MainWindow");
         }
 
         [TearDown]
         public void TearDown()
         {
             this.Driver.Quit();
+        }
+
+        protected ReadOnlyCollection<IWebElement> getItemList()
+        {
+            var productsList = this.MainWindowElement.FindElement(By.Id("ProductsMW"));
+            var productItems = productsList.FindElements(By.ClassName("ListViewItem"));
+
+            return productItems;
         }
 
         #endregion

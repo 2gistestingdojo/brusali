@@ -12,7 +12,6 @@ namespace TestingDojo2015
 
     class Release4DeleteAndSortingTypeTests : BaseTestFixture
     {
-        public IWebElement MainWindowElement;
         public IWebElement SearchTextboxElement;
         public IWebElement SearchButtonElement;
 
@@ -21,7 +20,6 @@ namespace TestingDojo2015
         {
             base.SetUp();
 
-            this.MainWindowElement = this.Driver.FindElementById("MainWindow");
             this.SearchTextboxElement = this.MainWindowElement.FindElement(By.Id("QueryMW"));
             this.SearchButtonElement = this.MainWindowElement.FindElement(By.Id("SearchMW"));
         }
@@ -29,8 +27,7 @@ namespace TestingDojo2015
         [Test]
         public void DeleteItem()
         {
-            var productsList = this.MainWindowElement.FindElement(By.Id("ProductsMW"));
-            var productItems = productsList.FindElements(By.ClassName("ListViewItem"));
+            var productItems = this.getItemList();
             var size = productItems.Count;
             var randomId = new Random().Next(0, productItems.Count - 1);
             var element = productItems.ElementAt(randomId);
@@ -39,8 +36,7 @@ namespace TestingDojo2015
 
             deleteButton.Click();
 
-            productsList = this.MainWindowElement.FindElement(By.Id("ProductsMW"));
-            productItems = productsList.FindElements(By.ClassName("ListViewItem"));
+            productItems = this.getItemList();
             IWebElement elementToFind = null;
 
             foreach (var item in productItems)
@@ -62,15 +58,13 @@ namespace TestingDojo2015
         {
             var sortDownButton = this.MainWindowElement.FindElement(By.Id("SortDownMW"));
 
-            var productsList = this.MainWindowElement.FindElement(By.Id("ProductsMW"));
-            var productItems = productsList.FindElements(By.ClassName("ListViewItem"));
+            var productItems = this.getItemList();
             var firstElementId =
                 productItems.First().FindElements(By.ClassName("TextBlock")).ElementAt(0).GetAttribute("Name");
 
             sortDownButton.Click();
 
-            productsList = this.MainWindowElement.FindElement(By.Id("ProductsMW"));
-            productItems = productsList.FindElements(By.ClassName("ListViewItem"));
+            productItems = this.getItemList();
             var lastElementId = productItems.Last().FindElements(By.ClassName("TextBlock")).ElementAt(0).GetAttribute("Name");
 
             Assert.That(firstElementId, Is.EqualTo(lastElementId));
@@ -95,8 +89,7 @@ namespace TestingDojo2015
 
             addButton.Click();
 
-            var productsList = this.MainWindowElement.FindElement(By.Id("ProductsMW"));
-            var productItems = productsList.FindElements(By.ClassName("ListViewItem"));
+            var productItems = this.getItemList();
             var lastElementName = productItems.Last().FindElements(By.ClassName("TextBlock")).ElementAt(1).GetAttribute("Name");
 
             Assert.That(lastElementName, Is.EqualTo(name));

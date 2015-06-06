@@ -12,7 +12,6 @@ namespace TestingDojo2015
 
     class Release2AddTests : BaseTestFixture
     {
-        public IWebElement MainWindowElement;
         public IWebElement SearchTextboxElement;
         public IWebElement SearchButtonElement;
         public IWebElement AddButtonElement;
@@ -22,7 +21,6 @@ namespace TestingDojo2015
         {
             base.SetUp();
 
-            this.MainWindowElement = this.Driver.FindElementById("MainWindow");
             this.SearchTextboxElement = this.MainWindowElement.FindElement(By.Id("QueryMW"));
             this.SearchButtonElement = this.MainWindowElement.FindElement(By.Id("SearchMW"));
             this.AddButtonElement = this.MainWindowElement.FindElement(By.Id("AddNewProductMW"));
@@ -31,8 +29,7 @@ namespace TestingDojo2015
         [Test]
         public void AddItem()
         {
-            var productsList = this.MainWindowElement.FindElement(By.Id("ProductsMW"));
-            var productItems = productsList.FindElements(By.ClassName("ListViewItem"));
+            var productItems = this.getItemList();
             var maxId = 0;
 
             foreach (var item in productItems)
@@ -56,8 +53,7 @@ namespace TestingDojo2015
 
             addButton.Click();
 
-            productsList = this.MainWindowElement.FindElement(By.Id("ProductsMW"));
-            productItems = productsList.FindElements(By.ClassName("ListViewItem"));
+            productItems = this.getItemList();
             IWebElement element = null;
          
             foreach (var item in productItems)

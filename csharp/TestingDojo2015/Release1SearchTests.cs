@@ -17,7 +17,6 @@
     {
         #region Public Methods and Operators
 
-        public IWebElement MainWindowElement;
         public IWebElement SearchTextboxElement;
         public IWebElement SearchButtonElement;
 
@@ -26,7 +25,6 @@
         {
             base.SetUp();
 
-            this.MainWindowElement = this.Driver.FindElementById("MainWindow");
             this.SearchTextboxElement = this.MainWindowElement.FindElement(By.Id("QueryMW"));
             this.SearchButtonElement = this.MainWindowElement.FindElement(By.Id("SearchMW"));
         }
@@ -73,8 +71,7 @@
 
         private int GetItemsCount()
         {
-            var productsList = this.MainWindowElement.FindElement(By.Id("ProductsMW"));
-            var productItems = productsList.FindElements(By.ClassName("ListViewItem"));
+            var productItems = this.getItemList();
 
             return productItems.Count(item => item.Displayed);
         }
