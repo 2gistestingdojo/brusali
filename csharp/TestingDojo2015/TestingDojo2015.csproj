@@ -50,6 +50,7 @@
     <Compile Include="Release2AddTests.cs" />
     <Compile Include="Release3EditingAndSortingTests.cs" />
     <Compile Include="Release4DeleteAndSortingTypeTests.cs" />
+    <Compile Include="Release5MultipleDeleteAndSortingFieldTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
