@@ -3,6 +3,8 @@
     #region using
 
     using System.Diagnostics;
+    using System.Linq;
+    using System.Threading;
 
     using NUnit.Framework;
 
@@ -74,8 +76,9 @@
             var productsList = this.MainWindowElement.FindElement(By.Id("ProductsMW"));
             var productItems = productsList.FindElements(By.ClassName("ListViewItem"));
 
-            return productItems.Count;
+            return productItems.Count(item => item.Displayed);
         }
+
 #endregion
     }
 }

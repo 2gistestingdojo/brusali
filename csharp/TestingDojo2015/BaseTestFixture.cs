@@ -21,7 +21,6 @@
 
         #region Public Methods and Operators
 
-        [SetUp]
         public void SetUp()
         {
             var appsFolder = Environment.GetEnvironmentVariable("UITestApps");
