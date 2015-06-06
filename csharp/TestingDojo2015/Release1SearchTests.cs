@@ -71,7 +71,7 @@
 
         private int GetItemsCount()
         {
-            var productItems = this.getItemList();
+            var productItems = this.GetItemList();
 
             return productItems.Count(item => item.Displayed);
         }

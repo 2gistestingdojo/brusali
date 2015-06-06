@@ -5,6 +5,7 @@
     using System;
     using System.Collections.ObjectModel;
     using System.IO;
+    using System.Linq;
 
     using NUnit.Framework;
 
@@ -42,12 +43,17 @@
             this.Driver.Quit();
         }
 
-        protected ReadOnlyCollection<IWebElement> getItemList()
+        protected ReadOnlyCollection<IWebElement> GetItemList()
         {
             var productsList = this.MainWindowElement.FindElement(By.Id("ProductsMW"));
             var productItems = productsList.FindElements(By.ClassName("ListViewItem"));
 
             return productItems;
+        }
+
+        protected string GetFieldTextValue(IWebElement element, int pos)
+        {
+            return element.FindElements(By.ClassName("TextBlock")).ElementAt(pos).GetAttribute("Name");
         }
 
         #endregion

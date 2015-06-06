@@ -27,21 +27,21 @@ namespace TestingDojo2015
         [Test]
         public void DeleteItem()
         {
-            var productItems = this.getItemList();
+            var productItems = this.GetItemList();
             var size = productItems.Count;
             var randomId = new Random().Next(0, productItems.Count - 1);
             var element = productItems.ElementAt(randomId);
-            var elementId = element.FindElements(By.ClassName("TextBlock")).ElementAt(0).GetAttribute("Name");
+            var elementId = this.GetFieldTextValue(element, 0);
             var deleteButton = element.FindElement(By.Id("DeleteMW"));
 
             deleteButton.Click();
 
-            productItems = this.getItemList();
+            productItems = this.GetItemList();
             IWebElement elementToFind = null;
 
             foreach (var item in productItems)
             {
-                var tmp = item.FindElements(By.ClassName("TextBlock")).ElementAt(0).GetAttribute("Name");
+                var tmp = this.GetFieldTextValue(item, 0);
 
                 if (tmp == elementId)
                 {
@@ -58,14 +58,13 @@ namespace TestingDojo2015
         {
             var sortDownButton = this.MainWindowElement.FindElement(By.Id("SortDownMW"));
 
-            var productItems = this.getItemList();
-            var firstElementId =
-                productItems.First().FindElements(By.ClassName("TextBlock")).ElementAt(0).GetAttribute("Name");
+            var productItems = this.GetItemList();
+            var firstElementId = this.GetFieldTextValue(productItems.First(), 0);
 
             sortDownButton.Click();
 
-            productItems = this.getItemList();
-            var lastElementId = productItems.Last().FindElements(By.ClassName("TextBlock")).ElementAt(0).GetAttribute("Name");
+            productItems = this.GetItemList();
+            var lastElementId = this.GetFieldTextValue(productItems.Last(), 0);
 
             Assert.That(firstElementId, Is.EqualTo(lastElementId));
         }
@@ -89,8 +88,8 @@ namespace TestingDojo2015
 
             addButton.Click();
 
-            var productItems = this.getItemList();
-            var lastElementName = productItems.Last().FindElements(By.ClassName("TextBlock")).ElementAt(1).GetAttribute("Name");
+            var productItems = this.GetItemList();
+            var lastElementName = this.GetFieldTextValue(productItems.Last(), 1);
 
             Assert.That(lastElementName, Is.EqualTo(name));
         }

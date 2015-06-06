@@ -30,9 +30,9 @@ namespace TestingDojo2015
         [Test]
         public void EditItem()
         {
-            var productItems = this.getItemList();
+            var productItems = this.GetItemList();
             var lastItem = productItems.Last();
-            var itemId = lastItem.FindElements(By.ClassName("TextBlock")).First().GetAttribute("Name");
+            var itemId = this.GetFieldTextValue(lastItem, 0);
             var actions = new Actions(this.Driver);
 
             actions.DoubleClick(lastItem).Perform();
@@ -46,14 +46,13 @@ namespace TestingDojo2015
 
             saveButton.Click();
 
-            productItems = this.getItemList();
+            productItems = this.GetItemList();
             var firstItem = productItems.First();
-            var texts = firstItem.FindElements(By.ClassName("TextBlock"));
-            var id = texts.First();
-            var text = texts.ElementAt(1);
+            var id = this.GetFieldTextValue(firstItem, 0);
+            var text = this.GetFieldTextValue(firstItem, 1);
 
-            Assert.That(text.GetAttribute("Name"), Is.EqualTo(newName));
-            Assert.That(itemId, Is.EqualTo(id.GetAttribute("Name")));
+            Assert.That(text, Is.EqualTo(newName));
+            Assert.That(itemId, Is.EqualTo(id));
         }
 
         [Test]
@@ -72,12 +71,11 @@ namespace TestingDojo2015
 
             addButton.Click();
 
-            var productItems = this.getItemList();
+            var productItems = this.GetItemList();
             var lastItem = productItems.First();
-            var texts = lastItem.FindElements(By.ClassName("TextBlock"));
-            var text = texts.ElementAt(1);
+            var text = this.GetFieldTextValue(lastItem, 1);
 
-            Assert.That(text.GetAttribute("Name"), Is.EqualTo(name));
+            Assert.That(text, Is.EqualTo(name));
         }
     }
 }

@@ -29,12 +29,12 @@ namespace TestingDojo2015
         [Test]
         public void AddItem()
         {
-            var productItems = this.getItemList();
+            var productItems = this.GetItemList();
             var maxId = 0;
 
             foreach (var item in productItems)
             {
-                var tmp = Convert.ToInt32(item.FindElements(By.ClassName("TextBlock")).First().GetAttribute("Name"));
+                var tmp = Convert.ToInt32(this.GetFieldTextValue(item, 0));
 
                 if (tmp > maxId)
                 {
@@ -53,12 +53,12 @@ namespace TestingDojo2015
 
             addButton.Click();
 
-            productItems = this.getItemList();
+            productItems = this.GetItemList();
             IWebElement element = null;
          
             foreach (var item in productItems)
             {
-                var tmp = item.FindElements(By.ClassName("TextBlock")).ElementAt(1).GetAttribute("Name");
+                var tmp = this.GetFieldTextValue(item, 1);
 
                 if (tmp == name)
                 {
@@ -68,12 +68,11 @@ namespace TestingDojo2015
 
             Assert.That(element, Is.Not.Null);
 
-            var texts = element.FindElements(By.ClassName("TextBlock"));
-            var id = texts.First();
-            var text = texts.ElementAt(1);
+            var id = this.GetFieldTextValue(element, 0);
+            var text = this.GetFieldTextValue(element, 1);
 
-            Assert.That(id.GetAttribute("Name"), Is.EqualTo(Convert.ToString(maxId + 1)));
-            Assert.That(text.GetAttribute("Name"), Is.EqualTo("Test product 1"));
+            Assert.That(id, Is.EqualTo(Convert.ToString(maxId + 1)));
+            Assert.That(text, Is.EqualTo(name));
         }
     }
 }
