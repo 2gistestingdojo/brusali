@@ -43,8 +43,9 @@ namespace TestingDojo2015
             var editWindow = this.Driver.FindElementById("ChangeProductWindow");
             var productName = editWindow.FindElement(By.Id("NameCW"));
             var saveButton = editWindow.FindElement(By.Id("SaveCW"));
+            var newName = "_Asc sorting test product 1";
 
-            productName.SendKeys("Asc sorting test product 1");
+            productName.SendKeys(newName);
 
             saveButton.Click();
 
@@ -54,7 +55,7 @@ namespace TestingDojo2015
             var id = texts.First();
             var text = texts.Last();
 
-            Assert.That(text.GetAttribute("Name"), Is.EqualTo("Asc sorting test product 1"));
+            Assert.That(text.GetAttribute("Name"), Is.EqualTo(newName));
             Assert.That(itemId, Is.EqualTo(id.GetAttribute("Name")));
         }
 
@@ -68,8 +69,9 @@ namespace TestingDojo2015
             var addWindow = this.Driver.FindElementById("AddNewProductWindow");
             var productName = addWindow.FindElement(By.Id("NameAW"));
             var addButton = addWindow.FindElement(By.Id("AddAW"));
+            var name = "_Test product 1";
 
-            productName.SendKeys("Test product 1");
+            productName.SendKeys(name);
 
             addButton.Click();
 
@@ -79,7 +81,7 @@ namespace TestingDojo2015
             var texts = lastItem.FindElements(By.ClassName("TextBlock"));
             var text = texts.Last();
 
-            Assert.That(text.GetAttribute("Name"), Is.EqualTo("Test product 1"));
+            Assert.That(text.GetAttribute("Name"), Is.EqualTo(name));
         }
     }
 }
